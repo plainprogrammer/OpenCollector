@@ -1,0 +1,32 @@
+name: "Continuous Integration"
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+permissions:
+  contents: read
+  checks: write
+jobs:
+  rspec:
+    name: "RSpec Test Suite"
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Set up database
+        run: bin/rails db:setup
+      - name: Precompile Assets
+        run: bin/rails assets:precompile
+      - name: Run tests
+        run: bin/rspec
+      - name: Simplecov Report
+        uses: joshmfrankel/simplecov-check-action@main
+        with:
+          minimum_suite_coverage: 0
+          github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -41,6 +41,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
 
   gem "standard", "~> 1.35", ">= 1.35.1"
+  gem "standard-rails"
 end
 
 group :development do

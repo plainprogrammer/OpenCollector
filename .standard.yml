@@ -1,0 +1,8 @@
+fix: true
+parallel: true
+format: progress
+ruby_version: 3.3
+
+plugins:
+  - standard-rails:
+      target_rails_version: 7.1

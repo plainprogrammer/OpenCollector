@@ -44,6 +44,7 @@ group :development, :test do
   gem "standard-rails"
 
   gem "rspec-rails", "~> 6.1", ">= 6.1.2"
+  gem "rspec-its"
 end
 
 group :development do

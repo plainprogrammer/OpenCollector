@@ -54,3 +54,7 @@ group :development do
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 end
+
+group :test do
+  gem "simplecov", require: false
+end

@@ -42,6 +42,8 @@ group :development, :test do
 
   gem "standard", "~> 1.35", ">= 1.35.1"
   gem "standard-rails"
+
+  gem "rspec-rails", "~> 6.1", ">= 6.1.2"
 end
 
 group :development do

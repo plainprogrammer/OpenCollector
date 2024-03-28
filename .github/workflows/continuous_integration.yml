@@ -28,5 +28,5 @@ jobs:
       - name: Simplecov Report
         uses: joshmfrankel/simplecov-check-action@main
         with:
-          minimum_suite_coverage: 0
+          minimum_suite_coverage: 98
           github_token: ${{ secrets.GITHUB_TOKEN }}

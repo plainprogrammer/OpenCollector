@@ -24,9 +24,9 @@ jobs:
       - name: Precompile Assets
         run: bin/rails assets:precompile
       - name: "Fetch 'Magic: The Gathering' Data"
-        run: "bin/rails runner 'Catalog::MagicTheGathering::FetchMtgjsonSqlite.new.perform'"
+        run: "bin/rake catalog:magic_the_gathering:fetch_mtgjson_sqlite"
       - name: "Load 'Magic: The Gathering' Data"
-        run: "bin/rails runner 'Catalog::MagicTheGathering::LoadMtgjsonSqlite.new.perform'"
+        run: "bin/rake catalog:magic_the_gathering:load_mtgjson_sqlite"
       - name: Run tests
         run: bin/rspec
       - name: Simplecov Report

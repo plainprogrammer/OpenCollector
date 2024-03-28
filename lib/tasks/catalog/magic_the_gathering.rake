@@ -4,5 +4,10 @@ namespace :catalog do
     task fetch_mtgjson_sqlite: :environment do
       Catalog::MagicTheGathering::FetchMtgjsonSqlite.new.perform
     end
+
+    desc "Load MTGJSON SQLite database"
+    task load_mtgjson_sqlite: :environment do
+      Catalog::MagicTheGathering::LoadMtgjsonSqlite.new.perform
+    end
   end
 end

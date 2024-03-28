@@ -4,7 +4,7 @@ require "digest"
 module Catalog
   module MagicTheGathering
     class FetchMtgjsonSqlite < ApplicationJob
-      FILENAME = "AllPrintings.sqlite.xz"
+      FILENAME = "AllPrintings.sqlite.gz"
       MTGJSON_FILE_URL = "https://mtgjson.com/api/v5/#{FILENAME}"
       MTGJSON_SHA_URL = "https://mtgjson.com/api/v5/#{FILENAME}.sha256"
 

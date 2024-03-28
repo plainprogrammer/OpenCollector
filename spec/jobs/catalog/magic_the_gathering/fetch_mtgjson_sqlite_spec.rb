@@ -17,7 +17,7 @@ RSpec.describe Catalog::MagicTheGathering::FetchMtgjsonSqlite do
   end
 
   describe "#perform" do
-    let(:target_file) { Rails.root.join("tmp/mtgjson/AllPrintings.sqlite.xz") }
+    let(:target_file) { Rails.root.join("tmp/mtgjson/AllPrintings.sqlite.gz") }
     let(:backup_file) { "#{target_file}.bak" }
 
     before do
@@ -32,7 +32,7 @@ RSpec.describe Catalog::MagicTheGathering::FetchMtgjsonSqlite do
       expect {
         job.perform
       }.to change {
-        Rails.root.join("tmp/mtgjson/AllPrintings.sqlite.xz").exist?
+        File.exist?(target_file)
       }.from(false).to(true)
     end
 
@@ -62,7 +62,7 @@ RSpec.describe Catalog::MagicTheGathering::FetchMtgjsonSqlite do
           expect {
             job.perform(since: 1.day.ago)
           }.not_to change {
-            Rails.root.join("tmp/mtgjson/AllPrintings.sqlite.xz").mtime
+            File.mtime(target_file)
           }
         end
       end

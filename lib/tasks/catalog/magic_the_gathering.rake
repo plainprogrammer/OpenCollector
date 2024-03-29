@@ -9,5 +9,10 @@ namespace :catalog do
     task load_mtgjson_sqlite: :environment do
       Catalog::MagicTheGathering::LoadMtgjsonSqlite.new.perform
     end
+
+    desc "Clean MTGJSON SQLITE downloaded files"
+    task clean_mtgjson_downloads: :environment do
+      FileUtils.rm_rf(Rails.root.join("tmp/mtgjson"))
+    end
   end
 end

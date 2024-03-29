@@ -30,4 +30,28 @@ RSpec.describe "catalog:magic_the_gathering" do
       task.invoke
     end
   end
+
+  describe "clean_mtgjson_downloads" do
+    subject(:task) { Rake::Task["catalog:magic_the_gathering:clean_mtgjson_downloads"] }
+    let(:target_file) { Rails.root.join("tmp/mtgjson/AllPrintings.sqlite.gz") }
+    let(:target_path) { Rails.root.join("tmp/mtgjson") }
+    let(:backup_path) { "#{target_path}_bak" }
+
+    before do
+      FileUtils.cp_r(target_path, backup_path) if Dir.exist?(target_path)
+    end
+
+    after do
+      FileUtils.rm_rf(target_path) if Dir.exist?(target_path)
+      FileUtils.mv(backup_path, target_path) if Dir.exist?(backup_path)
+    end
+
+    it "removes the compressed downloads" do
+      expect {
+        task.invoke
+      }.to change {
+        File.exist?(target_file)
+      }.from(true).to(false)
+    end
+  end
 end

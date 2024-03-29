@@ -15,7 +15,7 @@ jobs:
       RAILS_ENV: test
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
@@ -23,10 +23,14 @@ jobs:
         run: bin/rails db:setup
       - name: Precompile Assets
         run: bin/rails assets:precompile
+      - name: "Fetch 'Magic: The Gathering' Data"
+        run: "bin/rake catalog:magic_the_gathering:fetch_mtgjson_sqlite"
+      - name: "Load 'Magic: The Gathering' Data"
+        run: "bin/rake catalog:magic_the_gathering:load_mtgjson_sqlite"
       - name: Run tests
         run: bin/rspec
       - name: Simplecov Report
         uses: joshmfrankel/simplecov-check-action@main
         with:
-          minimum_suite_coverage: 0
+          minimum_suite_coverage: 98
           github_token: ${{ secrets.GITHUB_TOKEN }}
